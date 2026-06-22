@@ -21,8 +21,8 @@
                         {{ __('Produtos') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ url('suppliers/new') }}"
-                        :active="request()->is('suppliers/new')">
+                    <x-nav-link href="{{ url('suppliers') }}"
+                        :active="request()->is('suppliers*')">
                         {{ __('Fornecedores') }}
                     </x-nav-link>
                 </div>
@@ -84,8 +84,8 @@
                 :active="request()->is('products*')">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ url('suppliers/new') }}"
-                :active="request()->is('suppliers/new')">
+            <x-responsive-nav-link href="{{ url('suppliers') }}"
+                :active="request()->is('suppliers*')">
                 {{ __('Fornecedores') }}
             </x-responsive-nav-link>
         </div>

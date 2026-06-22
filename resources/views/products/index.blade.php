@@ -22,6 +22,7 @@
         <table class="w-full table-auto border-collapse border border-slate-600">
             <thead>
                 <tr class="bg-slate-700">
+                    <th class="px-4 py-2 text-left text-slate-300 border border-slate-600">Imagem</th>
                     <th class="px-4 py-2 text-left text-slate-300 border border-slate-600">Nome</th>
                     <th class="px-4 py-2 text-left text-slate-300 border border-slate-600">Preço</th>
                     <th class="px-4 py-2 text-left text-slate-300 border border-slate-600">Quantidade</th>
@@ -32,6 +33,13 @@
             <tbody>
                 @foreach($products as $product)
                 <tr class="border-b border-slate-600">
+                    <td class="px-4 py-2 text-slate-100">
+                        @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-16 w-16 object-cover rounded" />
+                        @else
+                        <div class="h-16 w-16 bg-slate-700 rounded flex items-center justify-center text-slate-400">—</div>
+                        @endif
+                    </td>
                     <td class="px-4 py-2 text-slate-100">{{ $product->name }}</td>
                     <td class="px-4 py-2 text-amber-400 font-medium">R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                     <td class="px-4 py-2 text-slate-100">{{ $product->quantity }}</td>

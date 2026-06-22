@@ -1,5 +1,36 @@
 <x-app-layout>
 
+    <form class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow" action="{{ url('suppliers/new') }}" method="POST">
+        @csrf
+
+        <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Cadastrar Fornecedor</h1>
+
+        @if($errors->any())
+        <div>
+            @foreach($errors->all() as $error)
+            {{ $error }}
+            @endforeach
+        </div>
+        @endif
+
+        <label class="block mb-1 text-gray-700 dark:text-gray-300">Nome:</label>
+        <input class="w-full p-2 mb-4 rounded border dark:bg-gray-700 dark:text-white" required name="name" type="text" />
+
+        <label class="block mb-1 text-gray-700 dark:text-gray-300">Email:</label>
+        <input class="w-full p-2 mb-4 rounded border dark:bg-gray-700 dark:text-white" name="email" type="email" />
+
+        <label class="block mb-1 text-gray-700 dark:text-gray-300">Telefone:</label>
+        <input class="w-full p-2 mb-4 rounded border dark:bg-gray-700 dark:text-white" name="phone" type="text" />
+
+        <label class="block mb-1 text-gray-700 dark:text-gray-300">Endereço:</label>
+        <input class="w-full p-2 mb-4 rounded border dark:bg-gray-700 dark:text-white" name="address" type="text" />
+
+        <input class="w-full p-2 rounded bg-blue-600 text-white" type="submit" value="Salvar" />
+    </form>
+
+</x-app-layout>
+<x-app-layout>
+
     <form>
 
         <x-toast type="success" message="Operação realizada com sucesso!" />

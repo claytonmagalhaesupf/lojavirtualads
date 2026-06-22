@@ -23,8 +23,8 @@ class ProductsController extends Controller
         //alimenta a var $errors na view
         $request->validate([
             'name' => 'required|min:2|max:50',
-            'quantity' => 'required|gt:0',
-            'price' => 'required|gt:0',
+            'quantity' => 'required|integer|min:1|max:1000000',
+            'price' => 'required|numeric|min:0.01',
             'image' => 'nullable|image|max:2048',
         ]);
 
@@ -70,8 +70,8 @@ class ProductsController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2|max:50',
-            'quantity' => 'required|gt:0',
-            'price' => 'required|gt:0',
+            'quantity' => 'required|integer|min:1|max:1000000',
+            'price' => 'required|numeric|min:0.01',
             'image' => 'nullable|image|max:2048',
         ]);
 

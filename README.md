@@ -1,4 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Apresentação - Loja Virtual
+
+Este repositório contém a aplicação Laravel usada no trabalho. Abaixo estão os pontos principais que você deve apresentar, como rodar o projeto e onde encontrar as alterações realizadas.
+
+**Visão Geral**
+- **Funcionalidade principal:** CRUD de fornecedores, upload de imagem para produtos e página pública de listagem de produtos com filtro por tipo.
+- **Stack:** Laravel 12 (PHP 8.2), Breeze, Tailwind CSS. Assets via Vite.
+
+**Principais arquivos alterados**
+- **Views (público):** [resources/views/welcome.blade.php](resources/views/welcome.blade.php) — página pública com grid de produtos, busca e filtro por `type_id`.
+- **Controllers:** [app/Http/Controllers/PublicProductController.php](app/Http/Controllers/PublicProductController.php) — controller público de listagem.
+- **Products:** [app/Models/Product.php](app/Models/Product.php) e [app/Http/Controllers/ProductsController.php](app/Http/Controllers/ProductsController.php) — suporte a `image` e validações atualizadas.
+- **Suppliers CRUD:** migration, model e controller em `database/migrations/*_create_suppliers_table.php`, [app/Models/Supplier.php](app/Models/Supplier.php), [app/Http/Controllers/SupplierController.php](app/Http/Controllers/SupplierController.php), views em `resources/views/suppliers/`.
+- **Migrations adicionadas:**
+  - `2026_06_21_000000_create_suppliers_table.php`
+  - `2026_06_21_000001_add_supplier_id_to_products.php`
+  - `2026_06_21_000002_add_image_to_products.php`
+
+**O que demonstrar na apresentação**
+- Mostrar a página pública (`/`) com produtos, filtro por tipo e imagens.
+- Demonstrar o CRUD de fornecedores (criar, editar, listar, remover) na área autenticada.
+- Mostrar upload de imagem ao criar/editar produto e exibição do thumbnail na listagem.
+- Explicar como as validações previnem erros (ex.: limites em `quantity` e validação de `price`).
+
+**Como rodar (ambiente com Docker)**
+1. Levante containers (se não estiverem ativos):
+```bash
+docker-compose up -d
+```
+2. Rodar migrations dentro do container `app`:
+```bash
+docker-compose exec app php artisan migrate --force
+docker-compose exec app php artisan storage:link
+```
+3. Compilar assets (no host ou no container):
+```bash
+# no host
+npm run dev
+# ou no container
+docker-compose exec app npm run dev
+```
+4. Abrir: http://localhost:8000/
+
+**Testes rápidos durante a apresentação**
+- Criar um produto autenticado (entrar) com imagem — verificar `storage/app/public/` e a exibição em `/`.
+- Mostrar listagem de fornecedores em `resources/views/suppliers/index.blade.php` e criação via formulário.
+
+**Comandos úteis**
+- Rodar testes (Pest): `docker-compose exec app php artisan test --compact`.
+- Ver status das migrations: `docker-compose exec app php artisan migrate:status`.
+
+**Notas de implementação / observações**
+- Mantivemos o Tailwind (padrão Breeze) — não foi adicionado Bootstrap.
+- O arquivo público `welcome.blade.php` foi ajustado para usar o slot `header` do layout Breeze e cards responsivos com classes Tailwind.
+- Se a página apresentar imagens faltando, verifique se `php artisan storage:link` foi executado e se a pasta `storage/app/public/products` contém os arquivos.
+
+**Próximos passos (opcionais)**
+- Adicionar paginação na listagem pública.
+- Página de detalhe do produto (show) com descrição completa.
+- Testes automatizados cobrindo upload e validações.
+
+---
+Se quiser, eu gero um slide curto (3-5 slides) com esses pontos para apresentar — quer que eu gere? <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>

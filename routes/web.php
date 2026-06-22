@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicProductController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PublicProductController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,9 +27,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products/delete/{id}', [ProductsController::class, 'destroy']);
 
-    Route::get('/suppliers/new', function () {
-        return view('suppliers.create');
-    });
+    Route::get('/suppliers/new', [SupplierController::class, 'create']);
+    Route::post('/suppliers/new', [SupplierController::class, 'store']);
+
+    Route::get('/suppliers', [SupplierController::class, 'index']);
+
+    Route::get('/suppliers/update/{id}', [SupplierController::class, 'edit']);
+    Route::post('/suppliers/update/', [SupplierController::class, 'update']);
+
+    Route::get('/suppliers/delete/{id}', [SupplierController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
