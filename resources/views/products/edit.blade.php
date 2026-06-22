@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <form class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow" action="{{ url('products/update') }}" method="POST">
+    <form class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow" action="{{ url('products/update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- campo oculto passando o ID como parâmetro no request -->
         <input type="hidden" name="id" value="{{ $product['id'] }}">
@@ -40,6 +40,17 @@
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('type_id')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="image" :value="__('Imagem (opcional)')" />
+            @if(isset($product->image) && $product->image)
+            <div class="mb-2">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-24 w-24 object-cover rounded" />
+            </div>
+            @endif
+            <input id="image" name="image" type="file" accept="image/*" class="block mt-1 w-full rounded border dark:bg-gray-700 dark:text-white p-2" />
+            <x-input-error :messages="$errors->get('image')" class="mt-2" />
         </div>
 
         <div class="mt-6">

@@ -6,6 +6,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/var/www/html
+      - vendor:/var/www/html/vendor
     depends_on:
       - db
 
@@ -34,3 +35,4 @@ services:
 
 volumes:
   dbdata:
+  vendor:
